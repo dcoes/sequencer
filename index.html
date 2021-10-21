@@ -6,75 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!-- LOAD Tone.js from unpkg -->
 		<script src="assets/js/Tone.js"></script>
-		<script>
-
-
-
-			function playNote() {
-				// create a synth
-				const synth = new Tone.Synth().toDestination();
-				// play a note from that synth
-				synth.triggerAttackRelease("C4", "8n");
-
-			}
-
-            function playSample(){
-                const sound = new Tone.Player("https://tonejs.github.io/audio/berklee/gong_1.mp3").toDestination();
-                
-                Tone.loaded().then(() => {
-	            sound.start();
-				});
-            }
-
-
-			
-			function playSequencer(){
-
-				console.clear();
-
-// UPDATE: there is a problem in chrome with starting audio context
-//  before a user gesture. This fixes it.
-document.documentElement.addEventListener('mousedown', () => {
-  if (Tone.context.state !== 'running') Tone.context.resume();
-});
-
-const synths = [
-  new Tone.Synth(),
-  new Tone.Synth(),
-  new Tone.Synth()
-];
-
-synths[0].oscillator.type = 'triangle';
-synths[1].oscillator.type = 'sine';
-synths[2].oscillator.type = 'sawtooth';
-
-const gain = new Tone.Gain(0.6);
-gain.toMaster();
-
-synths.forEach(synth => synth.connect(gain));
-
-const $rows = document.body.querySelectorAll('div > div'),
-      notes = ['G5', 'E4', 'C3'];
-let index = 0;
-
-Tone.Transport.scheduleRepeat(repeat, '8n');
-Tone.Transport.start();
-
-function repeat(time) {
-  let step = index % 8;
-  for (let i = 0; i < $rows.length; i++) {
-    let synth = synths[i],
-        note = notes[i],
-        $row = $rows[i],
-        $input = $row.querySelector(`input:nth-child(${step + 1})`);
-    if ($input.checked) synth.triggerAttackRelease(note, '8n', time);
-  }
-  index++;
-}
-
-				
-			}
-		</script>
+		<script src="assets/js/script.js"></script>
 
 	</head>
 	<body>
@@ -117,6 +49,22 @@ function repeat(time) {
 						<input type="checkbox" name="snare" id="notebox">
 						<input type="checkbox" name="snare" id="notebox">
 					</div>
+
+					<div class="res16">
+						<h5>16th Note Resolution</h5>
+						<br>
+						<input type="checkbox" name="snare" id="notebox">
+						<input type="checkbox" name="snare" id="notebox">
+						<input type="checkbox" name="snare" id="notebox">
+						<input type="checkbox" name="snare" id="notebox">
+						<input type="checkbox" name="snare" id="notebox">
+						<input type="checkbox" name="snare" id="notebox">
+						<input type="checkbox" name="snare" id="notebox">
+						<input type="checkbox" name="snare" id="notebox">
+					</div>
+					
+
+					
 				</div>
 		</div>
 
