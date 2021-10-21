@@ -6,6 +6,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!-- LOAD Tone.js from unpkg -->
 		<script src="assets/js/Tone.js"></script>
+		<script src="assets/js/tone-ui.js"></script>
+		<script src="assets/js/components.js"></script>
+
 		<script src="assets/js/script.js"></script>
 
 	</head>
@@ -14,6 +17,12 @@
 		<button onclick="playNote()">Play Synthetic Note</button>
         <button onclick="playSample()">Play Recorded Sound</button>
 		<button onclick="playSequencer()">Play Sequencer</button>
+
+		<div id="content">
+			<tone-play-toggle></tone-play-toggle>
+			<tone-slider label="tempo" units="bpm" min="60" max="240" value="120"></tone-slider>
+			<tone-step-sequencer></tone-step-sequencer>
+		</div>
 
 		<div>
 			<h2>Composition area</h2>
