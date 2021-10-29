@@ -20,17 +20,42 @@ function playNote() {
   synth.triggerAttackRelease("C4", "8n");
 }
 
+
 function playSample() {
   
   //plays a sample sound file.
-  const sound = new Tone.Player(
-    "https://tonejs.github.io/audio/berklee/gong_1.mp3"
+  const sound = new Tone.Player("https://tonejs.github.io/audio/berklee/gong_1.mp3"
   ).toDestination();
 
   Tone.loaded().then(() => {
     sound.start();
   });
 }
+
+
+function sequencer(){
+  const kick = new Tone.Player(
+    "https://tonejs.github.io/audio/berklee/gong_1.mp3"
+  ).toDestination();
+    //Tone.js sequencer/timing function
+  Tone.Transport.scheduleRepeat(repeat, "8n");
+  // We need the line below to actually start the sequencer:
+  Tone.Transport.start();
+    //advances the step:
+  function repeat(){
+    let step = index % 8;
+  }
+
+  //checks if the checkbox is checked.
+  let kickInputs = document.querySelector(".kick input:nth-child(${step + 1})");
+  if(kickInputs.checked){
+    kick.start();
+  }
+  index ++ ;
+
+}
+
+sequencer();
 
 function playSequencer(){
   const keys = new Tone.Players({
