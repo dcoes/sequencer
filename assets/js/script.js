@@ -32,11 +32,22 @@ function playSample() {
   });
 }
 
-
+//Does work now. See console. Won't stop sound though.
 function sequencer(){
-  const kick = new Tone.Player(
-    "https://tonejs.github.io/audio/berklee/gong_1.mp3"
+  const osc = new Tone.Player("https://tonejs.github.io/audio/berklee/gong_1.mp3").toDestination();
+  
+  Tone.Transport.scheduleRepeat((time) => {
+    // use the callback time to schedule events
+    osc.start(time).stop(time + 0.1);
+  }, "8n");
+  Tone.Transport.start();
+}
+
+/*
+function sequencer(time){
+  const sound = new Tone.Player("https://tonejs.github.io/audio/berklee/gong_1.mp3"
   ).toDestination();
+
     //Tone.js sequencer/timing function
   Tone.Transport.scheduleRepeat(repeat, "8n");
   // We need the line below to actually start the sequencer:
@@ -54,8 +65,8 @@ function sequencer(){
   index ++ ;
 
 }
+*/
 
-sequencer();
 
 function playSequencer(){
   const keys = new Tone.Players({
